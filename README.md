@@ -504,7 +504,7 @@ my.obj <- iclust(my.obj, k = 150, data.type = "knetl")
 
 # clustering based on PCA
 
-#my.obj <- iclust(my.obj,
+# my.obj <- iclust(my.obj,
 #    dist.method = "euclidean",
 #    k = 100,
 #    dims = 1:10,
@@ -512,11 +512,11 @@ my.obj <- iclust(my.obj, k = 150, data.type = "knetl")
 
 # or
 # run.phenograph
-#my.obj <- run.phenograph(my.obj,k = 100,dims = 1:10)
+# my.obj <- run.phenograph(my.obj,k = 100,dims = 1:10)
 
 # or 
 # run.clustering
-#my.obj <- run.clustering(my.obj, 
+# my.obj <- run.clustering(my.obj, 
 #	clust.method = "kmeans", 
 #	dist.method = "euclidean",
 #	index.method = "silhouette",
