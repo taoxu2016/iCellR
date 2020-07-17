@@ -8,7 +8,7 @@ iCellR is an interactive R package to work with high-throughput single cell sequ
 
 ### News (July 2020): See iCellR version 1.5.5 with new cell cycle analysis for G0, G1S, G2M, M, G1M and S [phase](https://genome.med.nyu.edu/results/external/iCellR/example1/All_cellcycle.png). See Pseudotime Abstract KNetL map [(PAK map)](https://genome.med.nyu.edu/results/external/iCellR/example1/pseudotime.KNetL.png). See gene-gene [correlations](https://genome.med.nyu.edu/results/external/iCellR/example1/gene-gene.correlation.png). See below for how to. 
 
-### News (May 2020): see our dimensionality reduction called [KNetL map](https://www.biorxiv.org/content/10.1101/2020.05.05.078550v1) <img src="https://github.com/rezakj/scSeqR/blob/master/doc/logo.png" alt="drawing" width="30"/> (pronounced like "nettle"). KNetL map is capable of zooming and shows a lot more details compared to tSNE and UMAP.
+### News (May 2020): see our dimensionality reduction called [KNetL map](https://genome.med.nyu.edu/results/external/iCellR/example1/Allclusts.Annotated.png) <img src="https://github.com/rezakj/scSeqR/blob/master/doc/logo.png" alt="drawing" width="30"/> (pronounced like "nettle"). KNetL map is capable of zooming and shows a lot more details compared to tSNE and UMAP.
 
 ### News (April 2020): see our imputation/coverage correction ([CC](https://genome.med.nyu.edu/results/external/iCellR/example1/gene-gene.correlation.png)) and batch alignment (CCCA and [CPCA](https://genome.med.nyu.edu/results/external/iCellR/example2/AllCondsClusts.png)) [methods](https://www.biorxiv.org/content/10.1101/2020.03.31.019109v1.full). More databases added for cell type prediction (ImmGen and MCA). 
 
@@ -32,7 +32,7 @@ For citing iCellR use these:
   <img src="https://github.com/rezakj/scSeqR/blob/dev/doc/first.gif" width="400"/>
   <img src="https://github.com/rezakj/scSeqR/blob/dev/doc/out2.gif" width="400"/>
 		 <img src="https://github.com/rezakj/scSeqR/blob/master/doc/Slide1_1.png"/>
-			 <img src="https://github.com/rezakj/scSeqR/blob/master/doc/Slide5_1.png"/>
+			 <img src="https://genome.med.nyu.edu/results/external/iCellR/example1/Allclusts.Annotated.png"/>
   <img src="https://github.com/rezakj/scSeqR/blob/dev/doc/out3.gif" width="400"/>
   <img src="https://github.com/rezakj/scSeqR/blob/dev/doc/out4.gif" width="400"/> 
 	  <img src="https://github.com/rezakj/scSeqR/blob/master/doc/gating2.gif"/>
