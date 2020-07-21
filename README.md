@@ -2463,7 +2463,7 @@ dev.off()
 
 
 ```r
-sessionInfo()
+> sessionInfo()
 R version 3.5.1 (2018-07-02)
 Platform: x86_64-pc-linux-gnu (64-bit)
 Running under: Red Hat Enterprise Linux
@@ -2484,34 +2484,42 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base
 
 other attached packages:
-[1] iCellR_1.2.2  plotly_4.9.0  ggplot2_3.2.1
+[1] cowplot_1.0.0  gridExtra_2.3  iCellR_1.5.5   plotly_4.9.2.1 ggplot2_3.3.2
 
 loaded via a namespace (and not attached):
- [1] ggrepel_0.8.1        Rcpp_1.0.2           ape_5.3
- [4] lattice_0.20-38      tidyr_1.0.0          assertthat_0.2.1
- [7] zeallot_0.1.0        digest_0.6.22        mime_0.7
-[10] R6_2.4.0             plyr_1.8.4           backports_1.1.5
-[13] acepack_1.4.1        httr_1.4.1           pillar_1.4.2
-[16] rlang_0.4.0          lazyeval_0.2.2       rstudioapi_0.10
-[19] data.table_1.12.6    rpart_4.1-15         Matrix_1.2-17
-[22] checkmate_1.9.4      reticulate_1.13      splines_3.5.1
-[25] Rtsne_0.15           stringr_1.4.0        foreign_0.8-72
-[28] htmlwidgets_1.5.1    pheatmap_1.0.12      munsell_0.5.0
-[31] umap_0.2.3.1         shiny_1.4.0          compiler_3.5.1
-[34] httpuv_1.5.2         xfun_0.10            pkgconfig_2.0.3
-[37] askpass_1.1          base64enc_0.1-3      htmltools_0.4.0
-[40] nnet_7.3-12          openssl_1.4.1        tidyselect_0.2.5
-[43] htmlTable_1.13.2     tibble_2.1.3         gridExtra_2.3
-[46] Hmisc_4.2-0          reshape_0.8.8        viridisLite_0.3.0
-[49] ggpubr_0.2.3         crayon_1.3.4         dplyr_0.8.3
-[52] withr_2.1.2          later_1.0.0          MASS_7.3-51.4
-[55] grid_3.5.1           NbClust_3.0          nlme_3.1-141
-[58] jsonlite_1.6         xtable_1.8-4         gtable_0.3.0
-[61] lifecycle_0.1.0      magrittr_1.5         scales_1.0.0
-[64] stringi_1.4.3        ggsignif_0.6.0       promises_1.1.0
-[67] scatterplot3d_0.3-41 latticeExtra_0.6-28  ggdendro_0.1-20
-[70] vctrs_0.2.0          Formula_1.2-3        RColorBrewer_1.1-2
-[73] tools_3.5.1          glue_1.3.1           purrr_0.3.3
-[76] parallel_3.5.1       fastmap_1.0.1        survival_2.44-1.1
-[79] colorspace_1.4-1     cluster_2.1.0        knitr_1.25
+  [1] nlme_3.1-148         bit64_0.9-7.1        RcppAnnoy_0.0.16
+  [4] RColorBrewer_1.1-2   progress_1.2.2       httr_1.4.1
+  [7] tools_3.5.1          backports_1.1.8      R6_2.4.1
+ [10] rpart_4.1-15         Hmisc_4.4-0          uwot_0.1.8
+ [13] lazyeval_0.2.2       colorspace_1.4-1     nnet_7.3-14
+ [16] withr_2.2.0          tidyselect_1.1.0     prettyunits_1.1.1
+ [19] bit_1.1-15.2         curl_4.3             compiler_3.5.1
+ [22] htmlTable_2.0.1      Cairo_1.5-12         hdf5r_1.3.2
+ [25] ggdendro_0.1-20      labeling_0.3         scales_1.1.1
+ [28] checkmate_2.0.0      stringr_1.4.0        digest_0.6.25
+ [31] foreign_0.8-76       rio_0.5.16           base64enc_0.1-3
+ [34] pkgconfig_2.0.3      htmltools_0.5.0      fastmap_1.0.1
+ [37] htmlwidgets_1.5.1    rlang_0.4.7          readxl_1.3.1
+ [40] rstudioapi_0.11      shiny_1.5.0          farver_2.0.3
+ [43] generics_0.0.2       jsonlite_1.7.0       crosstalk_1.1.0.1
+ [46] acepack_1.4.1        dplyr_1.0.0          zip_2.0.4
+ [49] car_3.0-8            magrittr_1.5         Formula_1.2-3
+ [52] NbClust_3.0          Matrix_1.2-18        Rcpp_1.0.5
+ [55] munsell_0.5.0        ape_5.4              abind_1.4-5
+ [58] lifecycle_0.2.0      yaml_2.2.1           scatterplot3d_0.3-41
+ [61] stringi_1.4.6        carData_3.0-4        MASS_7.3-51.6
+ [64] Rtsne_0.15           plyr_1.8.6           grid_3.5.1
+ [67] parallel_3.5.1       promises_1.1.1       ggrepel_0.8.2
+ [70] forcats_0.5.0        crayon_1.3.4         lattice_0.20-41
+ [73] haven_2.3.1          splines_3.5.1        hms_0.5.3
+ [76] knitr_1.29           pillar_1.4.6         igraph_1.2.5
+ [79] ggpubr_0.4.0         ggsignif_0.6.0       codetools_0.2-16
+ [82] glue_1.4.1           latticeExtra_0.6-28  data.table_1.12.8
+ [85] vctrs_0.3.2          httpuv_1.5.4         cellranger_1.1.0
+ [88] gtable_0.3.0         RANN_2.6.1           purrr_0.3.4
+ [91] tidyr_1.1.0          reshape_0.8.8        xfun_0.15
+ [94] openxlsx_4.1.5       mime_0.9             xtable_1.8-4
+ [97] broom_0.7.0          rstatix_0.6.0        later_1.1.0.1
+[100] survival_3.2-3       viridisLite_0.3.0    tibble_3.0.3
+[103] pheatmap_1.0.12      cluster_2.1.0        ellipsis_0.3.1
 ```
