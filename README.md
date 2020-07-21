@@ -342,7 +342,6 @@ make.gene.model(my.obj, my.out.put = "plot",
 	no.mito.model = T, 
 	mark.mito = T, 
 	interactive = F,
-	no.cell.cycle = T,
 	out.name = "gene.model")
 	
 # Write the gene model data into the object
@@ -353,7 +352,6 @@ my.obj <- make.gene.model(my.obj, my.out.put = "data",
 	no.mito.model = T, 
 	mark.mito = T, 
 	interactive = F,
-	no.cell.cycle = T,
 	out.name = "gene.model")
 
 head(my.obj@gene.model)
