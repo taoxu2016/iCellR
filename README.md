@@ -669,6 +669,8 @@ head(my.obj@clust.avg)
 
 - Cell cycle prediction 
 
+Tirosh scoring method ([Tirosh, et. al. 2016] (https://science.sciencemag.org/content/352/6282/189)) (default) or coverage is used to calculate G0, G1S, G2M, M, G1M and S phase score. The gene lists for G0, G1S, G2M, M, G1M and S phase are chosen from previously published article ([Xue, et.al 2020] (https://www.nature.com/articles/s41586-019-1884-x))
+
 ```r
 # old method 
 # my.obj <- cc(my.obj, s.genes = s.phase, g2m.genes = g2m.phase)
