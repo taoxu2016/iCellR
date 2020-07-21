@@ -2484,7 +2484,7 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base
 
 other attached packages:
-[1] cowplot_1.0.0  gridExtra_2.3  iCellR_1.5.5   plotly_4.9.2.1 ggplot2_3.3.2
+[1] iCellR_1.5.5   plotly_4.9.2.1 ggplot2_3.3.2
 
 loaded via a namespace (and not attached):
   [1] nlme_3.1-148         bit64_0.9-7.1        RcppAnnoy_0.0.16
