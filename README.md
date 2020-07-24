@@ -618,7 +618,8 @@ cluster.plot(my.obj,
 </p>
 
 - Pseudotime Abstract KNetL map (PAK map)
-This is very helpful to see the distances or similarities between different communities. The shorter and thiker the lines/links (rubber bands) are the more similar the communities. The nodes are the clusters and the edges or links are the distance between them. 
+
+This is very helpful to see the distances or similarities between different communities. The shorter and thicker the lines/links (rubber bands) are the more similar the communities. The nodes are the clusters and the edges or links are the distance between them. 
 
 ```r
 pseudotime.knetl(my.obj,interactive = F,cluster.membership = F,conds.to.plot = NULL)
