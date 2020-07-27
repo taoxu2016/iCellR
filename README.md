@@ -376,9 +376,13 @@ To view an the html interactive plot click on this links: [Dispersion plot](http
 
 - Perform Principal component analysis (PCA)
 
-Note: skip this step if you did batch correction. For batch correction (sample alignment/harmonization) see the sections; CCA, MNN or anchor (integration) alignment. 
+Note: skip this step if you plan to do batch correction. For batch correction (sample alignment/harmonization/integration) see the sections; CPCA, CCCA, MNN or anchor alignment. 
 
 ```r
+# If you run PCA (run.pca) there would be no batch alignment but if you run CPCA (using iba function) this would perform batch alignment and PCA after batch alignment. Example for batch alignment using iba function: 
+# my.obj <- iba(my.obj,dims = 1:30, k = 10,ba.method = "CPCA", method = "gene.model", gene.list = my.obj@gene.model)
+
+# run PCA in case no batch alignment is necessary
 my.obj <- run.pca(my.obj, method = "gene.model", gene.list = my.obj@gene.model,data.type = "main")
 
 opt.pcs.plot(my.obj)
