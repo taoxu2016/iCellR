@@ -2110,42 +2110,35 @@ Here is an example of how to add VDJ data.
                as.is = TRUE)
 	       
 ###
-head(My.VDJ)
-#  raw_clonotype_id            barcode is_cell                   contig_id
-#1       clonotype1 ACGCCAGCAAGCGCTC.1    True ACGCCAGCAAGCGCTC-1_contig_2
-#2       clonotype1 AACGTTGAGTACGATA.1    True AACGTTGAGTACGATA-1_contig_2
-#3       clonotype1 AACTCTTGTCAAAGCG.1    True AACTCTTGTCAAAGCG-1_contig_1
-#4       clonotype1 AACGTTGAGTACGATA.1    True AACGTTGAGTACGATA-1_contig_1
-#5       clonotype1 ACGCCAGCAAGCGCTC.1    True ACGCCAGCAAGCGCTC-1_contig_1
-#6       clonotype1 ACGATGTTCTGGTATG.1    True ACGATGTTCTGGTATG-1_contig_2
-#  high_confidence length chain  v_gene d_gene  j_gene c_gene full_length
-#1            True    571   TRA  TRAV27   None  TRAJ37   TRAC        True
-#2            True    730   TRA  TRAV27   None  TRAJ37   TRAC        True
-#3            True    722   TRB TRBV6-3  TRBD2 TRBJ1-1  TRBC1        True
-#4            True    723   TRB TRBV6-3  TRBD2 TRBJ1-1  TRBC1        True
-#5            True    722   TRB TRBV6-3  TRBD2 TRBJ1-1  TRBC1        True
-#6            True    726   TRA  TRAV27   None  TRAJ37   TRAC        True
-#  productive           cdr3                                    cdr3_nt reads
-#1       True CAGGRSSNTGKLIF TGTGCAGGAGGACGCTCTAGCAACACAGGCAAACTAATCTTT 14241
-#2       True CAGGRSSNTGKLIF TGTGCAGGAGGACGCTCTAGCAACACAGGCAAACTAATCTTT 27679
-#3       True CASRTGAGATEAFF TGTGCCAGCAGGACCGGGGCGGGAGCCACTGAAGCTTTCTTT 51844
-#4       True CASRTGAGATEAFF TGTGCCAGCAGGACCGGGGCGGGAGCCACTGAAGCTTTCTTT 38120
-#5       True CASRTGAGATEAFF TGTGCCAGCAGGACCGGGGCGGGAGCCACTGAAGCTTTCTTT 24635
-#6       True CAGGRSSNTGKLIF TGTGCAGGAGGACGCTCTAGCAACACAGGCAAACTAATCTTT 13720
-#  umis       raw_consensus_id my.raw_clonotype_id clonotype.Freq proportion
-#1    8 clonotype1_consensus_2          clonotype1             43  0.1572212
-#2   10 clonotype1_consensus_2          clonotype1             43  0.1572212
-#3   24 clonotype1_consensus_1          clonotype1             43  0.1572212
-#4   23 clonotype1_consensus_1          clonotype1             43  0.1572212
-#5   11 clonotype1_consensus_1          clonotype1             43  0.1572212
-#6    7 clonotype1_consensus_2          clonotype1             43  0.1572212
-#  total.colonotype
-#1              109
-#2              109
-#3              109
-#4              109
-#5              109
-#6              109
+head(my.vdj)
+#             barcode is_cell                   contig_id high_confidence length
+#1 AAACCTGTCCGAACGC-1    True AAACCTGTCCGAACGC-1_contig_1            True    654
+#2 AAACCTGTCCGAACGC-1    True AAACCTGTCCGAACGC-1_contig_2            True    697
+#3 AAACCTGTCCGAACGC-1    True AAACCTGTCCGAACGC-1_contig_3           False    496
+#4 AAACCTGTCCGAACGC-1    True AAACCTGTCCGAACGC-1_contig_4            True    539
+#5 AAACCTGTCGATGAGG-1    True AAACCTGTCGATGAGG-1_contig_1            True    705
+#6 AAACCTGTCGATGAGG-1    True AAACCTGTCGATGAGG-1_contig_2            True    491
+#  chain  v_gene d_gene  j_gene c_gene full_length productive           cdr3
+#1   TRB TRBV4-1   None TRBJ2-7  TRBC2        True       True    CASSQGVEQYF
+#2   TRA TRAV8-1   None  TRAJ42   TRAC        True       True  CAVKGGSQGNLIF
+#3   TRB    None   None TRBJ1-4  TRBC1       False       None           None
+#4 Multi    None   None  TRAJ10  TRBC1       False       None           None
+#5   TRB TRBV5-5  TRBD1 TRBJ2-7  TRBC1        True       True CASSLVSGGNEQYF
+#6   TRB    None   None TRBJ1-2  TRBC1       False       None           None
+#                                     cdr3_nt reads umis raw_clonotype_id
+#1          TGCGCCAGCAGCCAAGGGGTCGAGCAGTACTTC 42610   19     clonotype150
+#2    TGTGCCGTGAAGGGAGGAAGCCAAGGAAATCTCATCTTT 12297    4     clonotype150
+#3                                       None  4314    1     clonotype150
+#4                                       None  2212    1     clonotype150
+#5 TGTGCCAGCAGCTTGGTCTCAGGGGGAAACGAGCAGTACTTC 21148    8       clonotype2
+#6                                       None 17717   16       clonotype2
+#          raw_consensus_id
+#1 clonotype150_consensus_1
+#2 clonotype150_consensus_2
+#3                     None
+#4                     None
+#5   clonotype2_consensus_1
+#6                     None
 
 #### Prepare the vdj file
      My.VDJ <- prep.vdj(vdj.data = my.vdj, cond.name = "NULL")
