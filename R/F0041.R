@@ -2,7 +2,9 @@
 #'
 #' This function takes an object of class iCellR and provides plots for clonotypes.
 #' @param x An object of class iCellR.
-#' @param clono A clonotype name to be plotted, default = 1.
+#' @param clono A clonotype name to be plotted, default = NULL.
+#' @param clonotype.column The column which has the clonotype IDs, default =  2.
+#' @param barcode.column The column which has the barcode IDs, default = 1.
 #' @param plot.data.type Choose from "tsne" and "pca", default = "tsne".
 #' @param clust.dim 2 for 2D plots and 3 for 3D plots, default =  2.
 #' @param box.cell.col Choose a color for box default =  "black".
@@ -16,7 +18,9 @@
 #' @export
 clono.plot <- function (x = NULL,
                        plot.data.type = "tsne",
-                       clono = 1,
+                       clonotype.column = 2,
+                       barcode.column = 1,
+                       clono = NULL,
                        clust.dim = 2,
                        cell.size = 1,
                        cell.colors = c("red","gray"),
@@ -27,6 +31,10 @@ clono.plot <- function (x = NULL,
                        out.name = "plot") {
   if ("iCellR" != class(x)[1]) {
     stop("x should be an object of class iCellR")
+  }
+  ###
+  if (is.null(clono)) {
+    stop("Please provide a clonotype id (example: S1_clonotype1)")
   }
   ##### get cluster data
   # 2 dimentions
@@ -43,6 +51,14 @@ clono.plot <- function (x = NULL,
       MyTitle = "UMAP Plot"
       DATA <- x@umap.data
     }
+    if (plot.data.type == "diffusion") {
+      MyTitle = "Diffusion Map Plot"
+      DATA <- x@diffusion.data
+    }
+    if (plot.data.type == "knetl") {
+      MyTitle = "KNetL Plot"
+      DATA <- x@knetl.data
+    }
   }
   # 3 dimentions
   if (clust.dim == 3) {
@@ -54,42 +70,70 @@ clono.plot <- function (x = NULL,
       MyTitle = "3D PCA Plot"
       DATA <- x@pca.data
     }
-    if (plot.data.type == "dst") {
-      MyTitle = "3D DST Plot"
-      DATA <- x@diff.st.data
+    if (plot.data.type == "knetl") {
+      MyTitle = "KNetL Plot"
+      DATA <- x@knetl.data.3d
+    }
+    if (plot.data.type == "diffusion") {
+      MyTitle = "Diffusion Map Plot"
+      DATA <- x@diffusion.data
     }
   }
+  #######
+  MyRows <- rownames(DATA)
+  rownames(DATA) <- gsub("-",".",MyRows)
   ## clonotype
-      colono <- unique(x@vdj.data[1:2])
-      cell.barcodes <- colono$barcode
-      cell.barcodes <- gsub("-",".",cell.barcodes)
-      row.names(colono) <- cell.barcodes
-      colono$raw_clonotype_id <- gsub("clonotype"," ", colono$raw_clonotype_id)
-      colono <- colono[1]
-      colnames(colono) <- c("Clonotypes")
-      MyRows <- rownames(DATA)
-      rownames(DATA) <- gsub("-",".",MyRows)
-      if (dim(do.call('rbind', strsplit(as.character(rownames(colono)),'_',fixed=TRUE)))[2] == 1) {
-        if (dim(do.call('rbind', strsplit(as.character(rownames(DATA)),'_',fixed=TRUE)))[2] == 2) {
-          rownames(DATA) <- as.character(as.matrix(as.data.frame((do.call('rbind', strsplit(as.character(rownames(DATA)),'_',fixed=TRUE))))[2]))
-        }
-      }
-      colonoData <- merge(DATA,colono, by="row.names", all.x=TRUE, all.y=FALSE)
-      colonoData$Clonotypes <- gsub( " ", "", colonoData$Clonotypes)
-      colonoData$Clonotypes[is.na(colonoData$Clonotypes)] <- "NA"
-      colonoData$Clonotypes[colonoData$Clonotypes != clono] <- "NA"
-      colonoData$Clonotypes[colonoData$Clonotypes == clono] <- clono
-      DATA <- colonoData
-      row.names(DATA) <- DATA$Row.names
-      DATA <- DATA[,-1]
-      DATA <- (DATA[order(DATA$Clonotypes, decreasing = TRUE),])
-      clonotype <- factor(DATA$Clonotypes)
+      colono <- as.data.frame(cbind(as.character(as.matrix(x@vdj.data[clonotype.column])),
+                      as.character(as.matrix(x@vdj.data[barcode.column]))))
+      ######
+      colnames(colono) <- c("barcode","Clonotypes")
+      colono <- unique(colono)
+      colono$barcode <- gsub("-",".",colono$barcode)
+      row.names(colono) <- as.character(colono$barcode)
+#     head(colono)
+#      colono <- unique(x@vdj.data[1:2])
+#      cell.barcodes <- colono$barcode
+#      cell.barcodes <- gsub("-",".",cell.barcodes)
+#      row.names(colono) <- cell.barcodes
+
+#           colono$raw_clonotype_id <- gsub("clonotype"," ", colono$raw_clonotype_id)
+#      colono <- colono[1]
+
+#       if (dim(do.call('rbind', strsplit(as.character(rownames(colono)),'_',fixed=TRUE)))[2] == 1) {
+#        if (dim(do.call('rbind', strsplit(as.character(rownames(DATA)),'_',fixed=TRUE)))[2] == 2) {
+#          rownames(DATA) <- as.character(as.matrix(as.data.frame((do.call('rbind', strsplit(as.character(rownames(DATA)),'_',fixed=TRUE))))[2]))
+#        }
+#       }
+############## merge
+#     clono = "S1_clonotype1"
+     colono <- subset(colono, colono$Clonotypes == clono)
+#############
+     DATA1 <- subset(DATA, rownames(DATA) %in% row.names(colono))
+     DATA1$MyCol <- cell.colors[1]
+     DATA2 <- subset(DATA, !rownames(DATA) %in% row.names(colono))
+     DATA2$MyCol <- cell.colors[2]
+     DATA <- rbind(DATA2,DATA1)
+#      colonoData <- merge(DATA,colono, by="row.names", all.x=TRUE, all.y=FALSE)
+##############
+#      colonoData$Clonotypes <- gsub(" ", "", colonoData$Clonotypes)
+#      colonoData$Clonotypes[!is.na(colonoData$Clonotypes)] <- "red"
+#      colonoData$Clonotypes[is.na(colonoData$Clonotypes)] <- "gray"
+#      colonoData$Clonotypes[colonoData$Clonotypes != clono] <- "NA"
+#      colonoData$Clonotypes[colonoData$Clonotypes == clono] <- clono
+############
+#      DATA <- colonoData
+#      row.names(DATA) <- DATA$Row.names
+#      DATA <- DATA[,-1]
+#      DATA <- (DATA[order(DATA$Clonotypes, decreasing = TRUE),])
+#      clonotype <- factor(DATA$Clonotypes)
+#############
+     MyCol <- factor(DATA$MyCol)
     # plot 2d
     if (clust.dim == 2) {
       if (interactive == FALSE) {
-        myPLOT <- ggplot(DATA, aes(DATA[,1], y = DATA[,2],col=clonotype,
+        myPLOT <- ggplot(DATA, aes(DATA[,1], y = DATA[,2],
                                    text = row.names(DATA))) +
-          geom_point(size = cell.size, alpha = cell.transparency) +
+          geom_point(size = cell.size, alpha = cell.transparency, col=MyCol) +
           xlab("Dim1") +
           ylab("Dim2") +
           ggtitle(paste(MyTitle, "(clonotype",clono, ")")) +
@@ -100,8 +144,8 @@ clono.plot <- function (x = NULL,
                 legend.key = element_rect(fill = back.col))
       } else {
         myPLOT <- ggplot(DATA, aes(DATA[,1], y = DATA[,2],
-                                   text = row.names(DATA), color = clonotype)) +
-          geom_point(size = cell.size, alpha = cell.transparency) +
+                                   text = row.names(DATA))) +
+          geom_point(size = cell.size, alpha = cell.transparency, col=MyCol) +
           scale_color_manual(values = cell.colors) +
           xlab("Dim1") +
           ylab("Dim2") +
@@ -112,7 +156,7 @@ clono.plot <- function (x = NULL,
     # plot 3d
     if (clust.dim == 3) {
       myPLOT <- plot_ly(DATA, x = DATA[,1], y = DATA[,2], z = DATA[,3], text = row.names(DATA),
-                        color = clonotype, opacity = cell.transparency, marker = list(size = cell.size + 2)) %>%
+                        color = MyCol, opacity = cell.transparency, marker = list(size = cell.size + 2)) %>%
         layout(DATA, x = DATA[,1], y = DATA[,2], z = DATA[,3]) %>%
         layout(plot_bgcolor = back.col) %>%
         layout(paper_bgcolor = back.col) %>%

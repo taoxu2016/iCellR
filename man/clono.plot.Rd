@@ -7,7 +7,9 @@
 clono.plot(
   x = NULL,
   plot.data.type = "tsne",
-  clono = 1,
+  clonotype.column = 2,
+  barcode.column = 1,
+  clono = NULL,
   clust.dim = 2,
   cell.size = 1,
   cell.colors = c("red", "gray"),
@@ -23,7 +25,11 @@ clono.plot(
 
 \item{plot.data.type}{Choose from "tsne" and "pca", default = "tsne".}
 
-\item{clono}{A clonotype name to be plotted, default = 1.}
+\item{clonotype.column}{The column which has the clonotype IDs, default =  2.}
+
+\item{barcode.column}{The column which has the barcode IDs, default = 1.}
+
+\item{clono}{A clonotype name to be plotted, default = NULL.}
 
 \item{clust.dim}{2 for 2D plots and 3 for 3D plots, default =  2.}
 
