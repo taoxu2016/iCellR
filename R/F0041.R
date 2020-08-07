@@ -6,6 +6,7 @@
 #' @param clonotype.column The column which has the clonotype IDs, default =  2.
 #' @param barcode.column The column which has the barcode IDs, default = 1.
 #' @param plot.data.type Choose from "tsne" and "pca", default = "tsne".
+#' @param conds.to.plot Choose one condition you want to see in the plot, default = NULL (all conditions).
 #' @param clust.dim 2 for 2D plots and 3 for 3D plots, default =  2.
 #' @param box.cell.col Choose a color for box default =  "black".
 #' @param cell.size A number for the size of the points in the plot, default = 1.
@@ -21,12 +22,13 @@ clono.plot <- function (x = NULL,
                        clonotype.column = 2,
                        barcode.column = 1,
                        clono = NULL,
+                       conds.to.plot = NULL,
                        clust.dim = 2,
                        cell.size = 1,
                        cell.colors = c("red","gray"),
                        box.cell.col = "black",
                        back.col = "white",
-                       cell.transparency = 0.5,
+                       cell.transparency = 1,
                        interactive = TRUE,
                        out.name = "plot") {
   if ("iCellR" != class(x)[1]) {
@@ -89,7 +91,18 @@ clono.plot <- function (x = NULL,
       colnames(colono) <- c("barcode","Clonotypes")
       colono <- unique(colono)
       colono$barcode <- gsub("-",".",colono$barcode)
+      colono <- subset(colono, colono$Clonotypes == clono)
       row.names(colono) <- as.character(colono$barcode)
+      ####### Conditions
+           if (!is.null(conds.to.plot)) {
+             col.legend <- data.frame(do.call('rbind', strsplit(as.character(row.names(colono)),'_',fixed=TRUE)))[1]
+             colnames(col.legend) <- "Conditions"
+             colono$Conditions <- col.legend
+             if (length(conds.to.plot) > 1) {
+               stop("Please choose one condition at a time")
+             }
+             colono <- subset(colono, colono$Conditions == conds.to.plot)
+           }
 #     head(colono)
 #      colono <- unique(x@vdj.data[1:2])
 #      cell.barcodes <- colono$barcode
@@ -106,13 +119,13 @@ clono.plot <- function (x = NULL,
 #       }
 ############## merge
 #     clono = "S1_clonotype1"
-     colono <- subset(colono, colono$Clonotypes == clono)
 #############
      DATA1 <- subset(DATA, rownames(DATA) %in% row.names(colono))
      DATA1$MyCol <- cell.colors[1]
      DATA2 <- subset(DATA, !rownames(DATA) %in% row.names(colono))
      DATA2$MyCol <- cell.colors[2]
      DATA <- rbind(DATA2,DATA1)
+     #####
 #      colonoData <- merge(DATA,colono, by="row.names", all.x=TRUE, all.y=FALSE)
 ##############
 #      colonoData$Clonotypes <- gsub(" ", "", colonoData$Clonotypes)

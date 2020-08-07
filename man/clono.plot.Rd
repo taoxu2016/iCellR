@@ -10,12 +10,13 @@ clono.plot(
   clonotype.column = 2,
   barcode.column = 1,
   clono = NULL,
+  conds.to.plot = NULL,
   clust.dim = 2,
   cell.size = 1,
   cell.colors = c("red", "gray"),
   box.cell.col = "black",
   back.col = "white",
-  cell.transparency = 0.5,
+  cell.transparency = 1,
   interactive = TRUE,
   out.name = "plot"
 )
@@ -30,6 +31,8 @@ clono.plot(
 \item{barcode.column}{The column which has the barcode IDs, default = 1.}
 
 \item{clono}{A clonotype name to be plotted, default = NULL.}
+
+\item{conds.to.plot}{Choose one condition you want to see in the plot, default = NULL (all conditions).}
 
 \item{clust.dim}{2 for 2D plots and 3 for 3D plots, default =  2.}
 
