@@ -2245,7 +2245,7 @@ head(my.vdj.data)
 # add it to iCellR object
 my.obj <- add.vdj(my.obj, vdj.data = my.vdj.data)
  ```
- How to plot colonotypes
+ How to plot clonotypes
  
  ```r
  # once you have imported your clonotype data to your iCellR object, in order to plot them you need to have the following parapmeters:
