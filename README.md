@@ -2251,9 +2251,9 @@ my.obj <- add.vdj(my.obj, vdj.data = my.vdj.data)
  # once you have imported your clonotype data to your iCellR object, in order to plot them you need to have the following parapmeters:
  # -1 clonotype name (e.g. clono = "clonotype1")
  # -2 which column number has the clonotype names (e.g. clonotype.column = 2)
- # -3 which column number has the call barcode names (e.g. barcode.column = 1)
+ # -3 which column number has the cell barcode names (e.g. barcode.column = 1)
  
- # In order to plot you need 2 things a- cell barcodes that match the barcodes in UMAP,PCA,tSNE or KNetL data and clonotype names.
+ # In order to plot you need 2 things a- cell barcodes that match the barcodes in UMAP,PCA,tSNE or KNetL data and b- clonotype names.
  
  # to check your clonotype data do this (example):
  
