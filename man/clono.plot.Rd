@@ -7,8 +7,8 @@
 clono.plot(
   x = NULL,
   plot.data.type = "tsne",
-  clonotype.column = 2,
-  barcode.column = 1,
+  clonotype.column = 1,
+  barcode.column = 2,
   clono = NULL,
   conds.to.plot = NULL,
   clust.dim = 2,

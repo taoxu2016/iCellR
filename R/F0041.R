@@ -19,8 +19,8 @@
 #' @export
 clono.plot <- function (x = NULL,
                        plot.data.type = "tsne",
-                       clonotype.column = 2,
-                       barcode.column = 1,
+                       clonotype.column = 1,
+                       barcode.column = 2,
                        clono = NULL,
                        conds.to.plot = NULL,
                        clust.dim = 2,
@@ -85,17 +85,19 @@ clono.plot <- function (x = NULL,
   MyRows <- rownames(DATA)
   rownames(DATA) <- gsub("-",".",MyRows)
   ## clonotype
-      colono <- as.data.frame(cbind(as.character(as.matrix(x@vdj.data[clonotype.column])),
-                      as.character(as.matrix(x@vdj.data[barcode.column]))))
+
+  Bardata <- as.character(as.matrix(x@vdj.data[barcode.column]))
+  Colodata <- as.character(as.matrix(x@vdj.data[clonotype.column]))
+      colono <- as.data.frame(cbind(Bardata,Colodata))
       ######
       colnames(colono) <- c("barcode","Clonotypes")
       colono <- unique(colono)
       colono$barcode <- gsub("-",".",colono$barcode)
       colono <- subset(colono, colono$Clonotypes == clono)
-      row.names(colono) <- as.character(colono$barcode)
+#row.names(colono) <- as.character(colono$barcode)
       ####### Conditions
            if (!is.null(conds.to.plot)) {
-             col.legend <- data.frame(do.call('rbind', strsplit(as.character(row.names(colono)),'_',fixed=TRUE)))[1]
+             col.legend <- data.frame(do.call('rbind', strsplit(as.character(colono$barcode),'_',fixed=TRUE)))[1]
              colnames(col.legend) <- "Conditions"
              colono$Conditions <- col.legend
              if (length(conds.to.plot) > 1) {
@@ -120,9 +122,9 @@ clono.plot <- function (x = NULL,
 ############## merge
 #     clono = "S1_clonotype1"
 #############
-     DATA1 <- subset(DATA, rownames(DATA) %in% row.names(colono))
+     DATA1 <- subset(DATA, rownames(DATA) %in% colono$barcode)
      DATA1$MyCol <- cell.colors[1]
-     DATA2 <- subset(DATA, !rownames(DATA) %in% row.names(colono))
+     DATA2 <- subset(DATA, !rownames(DATA) %in% colono$barcode)
      DATA2$MyCol <- cell.colors[2]
      DATA <- rbind(DATA2,DATA1)
      #####
