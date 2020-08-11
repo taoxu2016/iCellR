@@ -2346,6 +2346,11 @@ ordered.clonotypes <- as.character(as.matrix((clonotype.frequency)[1]))
 # let's plot top 19 clonotypes with highest frequency:
 clonolist <- head(ordered.clonotypes, 19)
 clonolist
+# [1] "S2_clonotype1" "S1_clonotype1" "S3_clonotype1" "S4_clonotype1"
+# [5] "S5_clonotype1" "S2_clonotype2" "S3_clonotype2" "S1_clonotype2"
+# [9] "S2_clonotype4" "S1_clonotype4" "S3_clonotype4" "S2_clonotype3"
+#[13] "S4_clonotype2" "S1_clonotype3" "S4_clonotype3" "S5_clonotype2"
+#[17] "S3_clonotype3" "S2_clonotype9" "S3_clonotype6"
 
 
 rm(list = ls(pattern="PL_"))
