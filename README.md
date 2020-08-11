@@ -2243,37 +2243,140 @@ head(my.vdj.data)
 #6 0.04098361             1292
 
 # add it to iCellR object
-add.vdj(my.obj, vdj.data = my.vdj.data)
+my.obj <- add.vdj(my.obj, vdj.data = my.vdj.data)
  ```
  How to plot colonotypes
  
  ```r
+ # once you have imported your clonotype data to your iCellR object, in order to plot them you need to have the following parapmeters:
+ # -1 clonotype name (e.g. clono = "clonotype1")
+ # -2 which column number has the clonotype names (e.g. clonotype.column = 2)
+ # -3 which column number has the call barcode names (e.g. barcode.column = 1)
+ 
+ # In order to plot you need 2 things a- cell barcodes that match the barcodes in UMAP,PCA,tSNE or KNetL data and clonotype names.
+ 
+ # to check your clonotype data do this (example):
+ 
+head(my.obj@vdj.data)
+
+#  raw_clonotype_id_SampleID                MyBarcodes                 V1
+#1            S5_clonotype98 Nor2.A_AAACCTGAGACAGACC.1 AAACCTGAGACAGACC.1
+#2            S5_clonotype98 Nor2.A_AAACCTGAGACAGACC.1 AAACCTGAGACAGACC.1
+#3           S4_clonotype100 Nor2.B_AAACCTGAGAGACTAT.1 AAACCTGAGAGACTAT.1
+#4           S4_clonotype100 Nor2.B_AAACCTGAGAGACTAT.1 AAACCTGAGAGACTAT.1
+#5             S3_clonotype3 Nor1.B_AAACCTGAGAGTCGGT.1 AAACCTGAGAGTCGGT.1
+#6            S5_clonotype99 Nor2.A_AAACCTGAGATATGGT.1 AAACCTGAGATATGGT.1
+#                barcode SampleID raw_clonotype_id is_cell
+#1 S5_AAACCTGAGACAGACC.1        5      clonotype98    True
+#2 S5_AAACCTGAGACAGACC.1        5      clonotype98    True
+#3 S4_AAACCTGAGAGACTAT.1        4     clonotype100    True
+#4 S4_AAACCTGAGAGACTAT.1        4     clonotype100    True
+#5 S3_AAACCTGAGAGTCGGT.1        3       clonotype3    True
+#6 S5_AAACCTGAGATATGGT.1        5      clonotype99    True
+#                    contig_id high_confidence length chain   v_gene d_gene
+#1 AAACCTGAGACAGACC-1_contig_2            True    514   TRB   TRBV14   None
+#2 AAACCTGAGACAGACC-1_contig_1            True    495   TRB TRBV20-1   None
+#3 AAACCTGAGAGACTAT-1_contig_2            True    496   TRB    TRBV9   None
+#4 AAACCTGAGAGACTAT-1_contig_1            True    529   TRA TRAV26-1   None
+#5 AAACCTGAGAGTCGGT-1_contig_1            True    512   TRB  TRBV6-5   None
+#6 AAACCTGAGATATGGT-1_contig_2            True    544   TRA TRAV12-2   None
+#   j_gene c_gene full_length productive             cdr3
+#1 TRBJ1-5  TRBC1        True       True  CASSFEGGSTQPQHF
+#2 TRBJ2-7  TRBC2        True       True  CSARVRGRSSYEQYF
+#3 TRBJ2-2  TRBC2        True       True   CASSVGVNTGELFF
+#4  TRAJ52   TRAC        True       True CIVRGAGGTSYGKLTF
+#5 TRBJ1-1  TRBC1        True       True    CASSYRPNTEAFF
+#6  TRAJ33   TRAC        True       True    CAVKRDSNYQLIW
+#                                           cdr3_nt reads umis
+#1    TGTGCCAGCAGTTTTGAGGGGGGATCGACTCAGCCCCAGCATTTT   886    1
+#2    TGCAGTGCTAGAGTAAGGGGACGGAGCTCCTACGAGCAGTACTTC  1912    3
+#3       TGTGCCAGCAGCGTGGGCGTAAACACCGGGGAGCTGTTTTTT 10804   12
+#4 TGCATCGTCAGGGGGGCTGGTGGTACTAGCTATGGAAAGCTGACATTT   960    4
+#5          TGTGCCAGCAGTTACCGCCCGAACACTGAAGCTTTCTTT  4286    6
+#6          TGTGCCGTGAAAAGGGATAGCAACTATCAGTTAATCTGG  1244    2
+#          raw_consensus_id my.raw_clonotype_id clonotype.Freq   proportion
+#1  clonotype98_consensus_1      S5_clonotype98              1 0.0001983930
+#2  clonotype98_consensus_2      S5_clonotype98              1 0.0001983930
+#3 clonotype100_consensus_2     S4_clonotype100              1 0.0001923817
+#4 clonotype100_consensus_1     S4_clonotype100              1 0.0001923817
+#5   clonotype3_consensus_1       S3_clonotype3             49 0.0070635721
+#6  clonotype99_consensus_1      S5_clonotype99              1 0.0001983930
+#  total.colonotype
+#1             5096
+#2             5096
+#3             5280
+#4             5280
+#5             5943
+#6             5096
+
+
+# In this example column number 1 and 2 have the clonotype and barcode info needed to plot. 
+
+# Sort clonotype names with highset frequency:
+
+clonotype.frequency <- as.data.frame(sort(table(as.character(as.matrix((my.obj@vdj.data)[1]))),decreasing = TRUE))
+ 
+head(clonotype.frequency)
+#           Var1 Freq
+#1 S2_clonotype1  306
+#2 S1_clonotype1  242
+#3 S3_clonotype1  232
+#4 S4_clonotype1  216
+#5 S5_clonotype1  210
+#6 S2_clonotype2  113
+
+# let's plot S1_clonotype1 which is seen in 242 cells in all the conditions. 
+# if you want to plot only in one condtion or few conditions use this option "conds.to.plot" (e.g. conds.to.plot = c("WT","KO"))
+# If conds.to.plot = NULL it would plot all of them (all 242 cells). 
+
 # Plot colonotype 1
-clono.plot(my.obj, plot.data.type = "umap", 
-	clono = 1,
-	cell.transparency = 1,
-	clust.dim = 2,
-	interactive = F)
+clono.plot(my.obj, plot.data.type = "knetl",
+    clonotype.column = 1,
+    barcode.column = 2,
+    clono = "S1_clonotype1",
+    conds.to.plot = NULL,
+    cell.transparency = 1,
+    clust.dim = 2,
+    interactive = F)
 	
-# plot multiple
+# plot multiple clonotypes 
 
-clono.list = c(1:12)
+ordered.clonotypes <- as.character(as.matrix((clonotype.frequency)[1]))
 
-for(i in clono.list){
-MyPlot <- clono.plot(my.obj, plot.data.type = "umap", 
-	clono = i,
-	cell.transparency = 1,
-	clust.dim = 2,
-	interactive = F)
-	NameCol=paste("PL",i,sep="_")
-	eval(call("<-", as.name(NameCol), MyPlot))
+# let's plot top 19 clonotypes with highest frequency:
+clonolist <- head(ordered.clonotypes, 19)
+clonolist
+
+
+rm(list = ls(pattern="PL_"))
+for(i in clonolist){
+    MyPlot <- clono.plot(my.obj, plot.data.type = "knetl",
+    clonotype.column = 1,
+    barcode.column = 2,
+    clono = i,
+    conds.to.plot = NULL,
+    cell.transparency = 1,
+    clust.dim = 2,
+    interactive = F)
+    NameCol=paste("PL",i,sep="_")
+    eval(call("<-", as.name(NameCol), MyPlot))
 }
 
 library(cowplot)
 filenames <- ls(pattern="PL_")
 
+B= cluster.plot(my.obj,plot.type = "knetl",interactive = F,cell.size = 0.5,cell.transparency = 1,anno.clust=TRUE)
+filenames <- c("B",filenames)
+
+png("19_clonotypes.png",width = 20, height = 20, units = 'in', res = 300)
 plot_grid(plotlist=mget(filenames))
+dev.off()
  ```
+ 
+ <p align="center">
+  <img src="https://github.com/rezakj/scSeqR/blob/master/doc/19_clonotypes.png" />
+</p>
+
 
 # How to analyze large bulk RNA-Seq data (TCGA)
 
