@@ -100,9 +100,6 @@ clono.plot <- function (x = NULL,
              col.legend <- data.frame(do.call('rbind', strsplit(as.character(colono$barcode),'_',fixed=TRUE)))[1]
              colnames(col.legend) <- "Conditions"
              colono$Conditions <- col.legend
-             if (length(conds.to.plot) > 1) {
-               stop("Please choose one condition at a time")
-             }
              colono <- subset(colono, colono$Conditions == conds.to.plot)
            }
 #     head(colono)
