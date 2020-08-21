@@ -6,7 +6,7 @@
 \usage{
 gene.plot(
   x = NULL,
-  gene = "NULL",
+  gene = NULL,
   cond.shape = FALSE,
   conds.to.plot = NULL,
   data.type = "main",
