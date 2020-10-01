@@ -36,7 +36,6 @@ For citing iCellR use these:
   <img src="https://github.com/rezakj/scSeqR/blob/dev/doc/out3.gif" width="400"/>
   <img src="https://github.com/rezakj/scSeqR/blob/dev/doc/out4.gif" width="400"/> 
 	  <img src="https://github.com/rezakj/scSeqR/blob/master/doc/gating2.gif"/>
-	<img src="https://github.com/rezakj/scSeqR/blob/master/doc/Slide8.png"/>
 </p>
 
 ***
@@ -80,6 +79,10 @@ https://genome.med.nyu.edu/results/external/iCellR/
 
 ***
 # How to use iCellR for analyzing scRNA-seq data
+
+<p align="center">
+	<img src="https://github.com/rezakj/scSeqR/blob/master/doc/Slide8.png"/>
+</p>
 
 To run a test sample follow these steps:
 
