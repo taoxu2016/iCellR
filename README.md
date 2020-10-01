@@ -36,6 +36,7 @@ For citing iCellR use these:
   <img src="https://github.com/rezakj/scSeqR/blob/dev/doc/out3.gif" width="400"/>
   <img src="https://github.com/rezakj/scSeqR/blob/dev/doc/out4.gif" width="400"/> 
 	  <img src="https://github.com/rezakj/scSeqR/blob/master/doc/gating2.gif"/>
+	<img src="https://github.com/rezakj/scSeqR/blob/master/doc/Slide8.png"/>
 </p>
 
 ***
