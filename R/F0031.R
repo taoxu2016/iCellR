@@ -25,6 +25,7 @@
 #' @param box.transparency Color transparency for box in "boxplot", default = 0.5.
 #' @param interactive If set to TRUE an interactive HTML file will be created, default = TRUE.
 #' @param out.name If "interactive" is set to TRUE, the out put name for HTML, default = "plot".
+#' @param write.data Write export the data used for the plot plot, default = TFALSE.
 #' @return An object of class iCellR.
 #' @examples
 #' gene.plot(demo.obj, gene = "CD74",interactive = FALSE)
@@ -75,7 +76,8 @@ gene.plot <- function (x = NULL,
                        cell.transparency = 1,
                        box.transparency = 0.5,
                        interactive = TRUE,
-                       out.name = "plot") {
+                       out.name = "plot",
+                       write.data = FALSE) {
   if ("iCellR" != class(x)[1]) {
     stop("x should be an object of class iCellR")
   }
@@ -400,11 +402,38 @@ gene.plot <- function (x = NULL,
         theme_bw() + theme(axis.text.x=element_text(angle=90)) + facet_wrap(~ Conditions)
     }
   }
+  ########
+  if (plot.type == "violin") {
+    if (cond.shape == FALSE) {
+      myPLOT <- ggplot(DATA,
+        aes(x = Clusters, y=log2(Expression + 1))) +
+        theme_classic() + theme(axis.text.x=element_text(angle=90)) +
+        ggtitle(geneNAME) +
+        geom_violin(trim=TRUE, col = "black", alpha = cell.transparency) +
+        ylab("scaled normalized expression") +
+        xlab(".")
+    }
+    if (cond.shape == TRUE) {
+      myPLOT <- ggplot(DATA,
+        aes(x = Clusters, y=log2(Expression + 1), fill=Conditions)) +
+        theme_classic() + theme(axis.text.x=element_text(angle=90)) +
+        ggtitle(geneNAME) +
+        geom_violin(trim=TRUE, col = "black", alpha = cell.transparency) +
+        ylab("scaled normalized expression") +
+        xlab(".")
+    }
+  }
   # return
+if (write.data == TRUE) {
+ write.table(DATA,paste(geneNAME,".tsv",sep=""),
+             row.names = TRUE,quote = FALSE,sep="\t")
+}
+if (write.data == FALSE) {
   if (interactive == TRUE) {
     OUT.PUT <- paste(out.name, ".html", sep="")
     htmlwidgets::saveWidget(ggplotly(myPLOT), OUT.PUT)
   } else {
     return(myPLOT)
+   }
   }
 }
