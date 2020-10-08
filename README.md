@@ -485,7 +485,7 @@ grid.arrange(A,B,C,D)
 We provide three functions to run the clustering method of your choice:
 
 ### 1- iclust (** recommended): 
-Faster and optimized for iCellR. This function takes PCA, UMAP or tSNE as input, however we recommend using the PCA data as in default. This function is using Louvain algorithm for clustering a graph made using KNN. Similar to PhenoGraph (Levine et al., Cell, 2015) however instead of Jaccard similarity values we use distance (euclidean by default) values for the weights.
+Faster and optimized for iCellR. This function takes PCA, UMAP or tSNE, Destiny (diffusion map), PHATE or KNetL map as input. This function is using Louvain algorithm for clustering a graph made using KNN. Similar to PhenoGraph (Levine et al., Cell, 2015) however instead of Jaccard similarity values we use distance (euclidean by default) values for the weights.
 
 ##### 2- run.phenograph: 
 R implementation of the PhenoGraph algorithm. [Rphenograph](https://github.com/JinmiaoChenLab/Rphenograph) wrapper (Levine et al., Cell, 2015). 
@@ -677,6 +677,8 @@ head(my.obj@clust.avg)
 - Cell cycle prediction 
 
 Tirosh scoring method [Tirosh, et. al. 2016](https://science.sciencemag.org/content/352/6282/189) (default) or coverage is used to calculate G0, G1S, G2M, M, G1M and S phase score. The gene lists for G0, G1S, G2M, M, G1M and S phase are chosen from previously published article [Xue, et.al 2020](https://www.nature.com/articles/s41586-019-1884-x)
+
+NOTE: These genes work best for cancer cells. You can use a different gene set for each category (G0, G1S, G2M, M, G1M and S).  
 
 ```r
 # old method 
