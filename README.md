@@ -422,17 +422,17 @@ my.obj <- run.pc.tsne(my.obj, dims = 1:10)
 # UMAP
 my.obj <- run.umap(my.obj, dims = 1:10)
 
-# KNetL (for lager than 5000 cell use a k of about 400) 
+# KNetL (for lager than 5000 cell use a zoom of > 200) 
 # Because knetl has a very high resolution it's best to use a dim of 20 (this usually works best for most data)
-my.obj <- run.knetl(my.obj, dims = 1:20, k = 110, dim.redux = "umap")
+my.obj <- run.knetl(my.obj, dims = 1:20, zoom = 110, dim.redux = "umap")
 
 ########################### IMPORTANT NOTE ########################################
 #### Because KNetl has a very high resolution it's best to use a dim of 20 (this usually works best for most data)
-#### For zooming use the k value. For data with more than 5000 cells use a k of about 400. 
-#### A k value of 400 is usually good for big data but adjust it for intended resolution. 
+#### For data with more than 5000 cells use a zoom of > 200. 
+#### A zoom value of 400 is usually good for big data but adjust it for intended resolution. 
 #### Just like a microscope, you need to zoom to see the intended amount of details. 
-#### Here we use a k of 100 or 110 but this might not be ideal for your data.
-#### example: # my.obj <- run.knetl(my.obj, dims = 1:20, k = 400)
+#### Here we use a zoom of 100 or 110 but this might not be ideal for your data.
+#### example: # my.obj <- run.knetl(my.obj, dims = 1:20, zoom = 400)
 #### Because knetl has a very high resolution it's best to use a dim of 20 (this usually works best for most data)
 ###################################################################################
 ###################################################################################
@@ -504,17 +504,16 @@ This is one of the harder parts of the analysis and sometimes you need to adjust
 ```r
 # clustering based on KNetL
 
-my.obj <- iclust(my.obj, k = 150, data.type = "knetl") 
+my.obj <- iclust(my.obj, sensitivity = 150, data.type = "knetl") 
 
-# play with k to get the clusters right. Usually 150 is good.
-
+# play with sensitivity to get the intended number of clusters.
 ###### more examples 
 
 # clustering based on PCA
 
 # my.obj <- iclust(my.obj,
 #    dist.method = "euclidean",
-#    k = 100,
+#    sensitivity = 100,
 #    dims = 1:10,
 #    data.type = "pca")
 
