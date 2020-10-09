@@ -555,7 +555,7 @@ my.obj <- iclust(my.obj, sensitivity = 150, data.type = "knetl")
 
 ```r
 # plot clusters (in the figures below clustering is done based on KNetL) 
-# example: # my.obj <- iclust(my.obj, k = 150, data.type = "knetl") 
+# example: # my.obj <- iclust(my.obj, sensitivity = 150, data.type = "knetl") 
 
 A <- cluster.plot(my.obj,plot.type = "pca",interactive = F,cell.size = 0.5,cell.transparency = 1, anno.clust=T)
 B <- cluster.plot(my.obj,plot.type = "umap",interactive = F,cell.size = 0.5,cell.transparency = 1,anno.clust=T)
