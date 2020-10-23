@@ -12,7 +12,7 @@ iCellR is an interactive R package to work with high-throughput single cell sequ
 
 ### News (April 2020): see our imputation/coverage correction ([CC](https://genome.med.nyu.edu/results/external/iCellR/example1/gene-gene.correlation.png)) and batch alignment (CCCA and [CPCA](https://genome.med.nyu.edu/results/external/iCellR/example2/AllCondsClusts.png)) [methods](https://www.biorxiv.org/content/10.1101/2020.03.31.019109v1.full). More databases added for cell type prediction (ImmGen and MCA). 
 
-### All you need to know about KNetL map [Video](https://vimeo.com/469025740?fbclid=IwAR1Wz-iL4s5HaIxTGFuPdy29gNkfWvPRL_puTQcxPws6IL-U2DKdBjEF9tA)
+### All you need to know about KNetL map [Video](https://youtu.be/tkoPTVciQm0)
 
 - Tutorial: [example 1 code](https://genome.med.nyu.edu/results/external/iCellR/example1/code.txt) and [results](https://genome.med.nyu.edu/results/external/iCellR/example1/) (based on KNetL map <img src="https://github.com/rezakj/scSeqR/blob/master/doc/logo.png" alt="drawing" width="30"/>) 
 - Tutorial: [example 2 code](https://genome.med.nyu.edu/results/external/iCellR/example2/code.txt) and [results](https://genome.med.nyu.edu/results/external/iCellR/example2/) (based on CPCA batch alignment and KNetL map <img src="https://github.com/rezakj/scSeqR/blob/master/doc/logo.png" alt="drawing" width="30"/>) 
