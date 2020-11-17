@@ -1123,6 +1123,19 @@ D <- gene.plot(my.obj, gene = "MS4A1",
 
 library(gridExtra)
 grid.arrange(A,B,C,D)
+
+## Write data to make customized plots 
+
+gene.plot(my.obj, gene = "MS4A1", write.data = T, scaleValue = T, data.type = "main")
+
+ head(read.table("MS4A1.tsv"))
+#                            V1         V2 Expression Clusters Conditions
+#WT_AAACATACAACCAC.1  12.499481 -11.436633        0.0        9         WT
+#WT_AAACATTGAGCTAC.1  -8.783793  24.417999        2.5        8         WT
+#WT_AAACATTGATCAGC.1  -2.650761  10.932273        0.0       10         WT
+#WT_AAACCGTGCTTCCG.1 -28.916702  -5.542731        0.0        4         WT
+#WT_AAACCGTGTATGCG.1  21.211557 -31.626822        0.0        2         WT
+#WT_AAACGCACTGGTAC.1   5.225419  -5.141192        0.0       10         WT
  ```
  
  <p align="center">
