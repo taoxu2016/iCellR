@@ -615,7 +615,6 @@ cluster.plot(my.obj,
               plot.type = "knetl",
               cell.color = "black",
               back.col = "white",
-              col.by = "conditions",
               cell.transparency = 1,
               clust.dim = 2,
               interactive = F,cond.facet = T)
@@ -623,7 +622,7 @@ cluster.plot(my.obj,
 
 <p align="center">
       <img src="https://genome.med.nyu.edu/results/external/iCellR/example1/Allconds.png"/> 
-	<img src="https://genome.med.nyu.edu/results/external/iCellR/example1/Allconds_clusts.png"/> 
+	<img src="https://genome.med.nyu.edu/results/external/iCellR/example1/AllConds_clusts_knetl.png"/> 
 </p>
 
 - Pseudotime Abstract KNetL map (PAK map)
